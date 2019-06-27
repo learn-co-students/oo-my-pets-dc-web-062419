@@ -2,16 +2,22 @@ require 'pry'
 
 class Owner
   attr_reader :name, :species
-  attr_accessor :cats, :dogs 
+  # attr_accessor :cats, :dogs 
   
   @@all = []
 
   def initialize(name)
     @name = name
     @species = "human"
-    @cats = []
-    @dogs = []
     @@all << self
+  end
+
+  def dogs
+    Dog.all.select { |dog| @name = dog.owner }
+  end
+
+  def cats
+    Cat.all.select { |cat| @name = cat.owner }
   end
 
   def say_species
@@ -31,11 +37,11 @@ class Owner
   end
 
   def buy_cat(cat_name)
-   @cats << Cat.new(cat_name, self)
+    Cat.new(cat_name, self)
   end
 
   def buy_dog(dog_name)
-    @dogs << Dog.new(dog_name, self)
+    Dog.new(dog_name, self)
   end
 
   def walk_dogs
@@ -60,7 +66,7 @@ class Owner
   end
 
   def list_pets
-    "I have #{@dogs.length} dog(s), and #{@cats.length} cat(s)."
+    "I have #{dogs.length} dog(s), and #{cats.length} cat(s)."
   end
   
 end
