@@ -13,15 +13,15 @@ class Owner
   end
 
   def dogs
-    Dog.all.select { |dog| @name = dog.owner }
+    Dog.all.select { |dog| self == dog.owner }
   end
 
   def cats
-    Cat.all.select { |cat| @name = cat.owner }
+    Cat.all.select { |cat| self == cat.owner }
   end
 
   def say_species
-    "I am a #{@species}."
+    "I am a #{self.species}."
   end
 
   def self.all
